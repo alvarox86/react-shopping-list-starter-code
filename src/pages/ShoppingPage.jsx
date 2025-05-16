@@ -8,29 +8,21 @@ import SearchBar from "../components/SearchBar";
 import testProducts from "../data/testProducts.json";
 
 function ShoppingPage() {
-
-  const [ allProducts, setAllProducts ] = useState(testProducts) 
+  const [allProducts, setAllProducts] = useState(testProducts);
   //* initial state. change to empty array when finished with add functionality
+  const [searchInputValue, setSearchInputValue] = useState("");
 
   return (
     <>
-
       <h1>Shopping List!</h1>
 
+      <AddForm setAllProducts={setAllProducts} />
       {/* //* all elements of the shopping list will be here */}
-      {allProducts.map((eachProduct, index) => {
-        return (
-          <div className="product-card" key={index}>
-            <h3>{eachProduct.name}</h3>
-            <p>{eachProduct.price}€</p>
-            <p>{eachProduct.isPurchased === true ? "✅" : "🟡"}</p>
-            <button>Buy</button>
-          </div>
-        )
-      })}
+      <SearchBar searchInputValue={searchInputValue} setSearchInputValue={setSearchInputValue}/>
 
+      <ProductList allProducts={allProducts} searchInputValue={searchInputValue} setAllProducts={setAllProducts}/>
     </>
-  )
+  );
 }
 
-export default ShoppingPage
+export default ShoppingPage;
